@@ -13,15 +13,24 @@ class MyComponent extends React.Component {
         address: 'Ha noi'
     }
 
+    handleOnChange = (event) => {
+        this.setState({
+            name: event.target.value
+        })
+    }
+
     render() {
         let name = 'NTH';
         return(
-            <React.Fragment> 
+            <React.Fragment>
+                <input value={this.state.name} type='text' onChange={(event) => {
+                    this.handleOnChange(event)
+                }}/>
                 <div className='abc'>
                     hello my component from VsCode, My name is {name}
                 </div>
                 <div className='123'>
-                    okeeee {this.state.address}
+                    okeeee {this.state.name}
                 </div>
             </React.Fragment>
 
