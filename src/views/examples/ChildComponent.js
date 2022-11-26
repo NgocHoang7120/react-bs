@@ -7,10 +7,15 @@ class ChildComponent extends React.Component{
     }
     render(){
         console.log('>>>check data input: ', this.state);
+        console.log('>>>check props: ', this.props);
+        // let name = this.props.name;
+        // let age = this.props.age;
+
+        let {name, age} = this.props
         return(
             <>
                 {/* this.props.name là lấy dữ liệu name từ thằng cha truyền xuống */}
-                <div>number: {this.props.name}</div>
+                <div>number: {name} - {age}</div>
             </>
         )
     }
