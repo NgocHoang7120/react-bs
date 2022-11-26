@@ -1,4 +1,5 @@
 import React from 'react';
+import ChildComponent from './ChildComponent';
 
 // class MyComponent kế thừa class Component
 class MyComponent extends React.Component {
@@ -29,7 +30,10 @@ class MyComponent extends React.Component {
                     <label htmlFor="lname">Last name:</label><br/>
                     <input type="text" value={this.state.lastName} onChange={event => this.handleChangeLasttName(event)} /><br/><br/>
                     <input type="submit" value="Click here" onClick={(event) => this.handleSubmit(event)} />
-                </form> 
+                </form>
+                <ChildComponent name = {'one'}/>
+                <ChildComponent name={'two'} />
+                <ChildComponent name={'three'} />
             </>
 
         )
