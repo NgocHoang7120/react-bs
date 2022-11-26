@@ -8,31 +8,29 @@ class MyComponent extends React.Component {
 // jsx cho phép viết cú pháp javascript trong html
 // khai báo state global
     state = {
-        name: 'CNH',
-        age: 21,
-        address: 'Ha noi'
+        firstName: '',
+        lastName: ''
     }
 
-    handleOnChange = (event) => {
-        this.setState({
-            name: event.target.value
-        })
+    handleChangeFirstName = (event) => this.setState({ firstName: event.target.value })
+    handleChangeLasttName = (event) => this.setState({ lastName: event.target.value })
+    handleSubmit = (event) => {
+        event.preventDefault()
+        console.log('>>>check data input (state): ', this.state);
+        alert('click me')
     }
-
     render() {
-        let name = 'NTH';
+        console.log('>>>call render:', this.state);
         return(
-            <React.Fragment>
-                <input value={this.state.name} type='text' onChange={(event) => {
-                    this.handleOnChange(event)
-                }}/>
-                <div className='abc'>
-                    hello my component from VsCode, My name is {name}
-                </div>
-                <div className='123'>
-                    okeeee {this.state.name}
-                </div>
-            </React.Fragment>
+            <>
+                <form action="">
+                    <label htmlFor="fname">First name:</label><br/>
+                    <input type="text" value={this.state.firstName} onChange={(event) => this.handleChangeFirstName(event)} /><br/>
+                    <label htmlFor="lname">Last name:</label><br/>
+                    <input type="text" value={this.state.lastName} onChange={event => this.handleChangeLasttName(event)} /><br/><br/>
+                    <input type="submit" value="Click here" onClick={(event) => this.handleSubmit(event)} />
+                </form> 
+            </>
 
         )
     }
