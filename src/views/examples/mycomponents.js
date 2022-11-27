@@ -1,5 +1,6 @@
 import React from 'react';
 import ChildComponent from './ChildComponent';
+import FunctionComponent from './functioncomponent';
 
 // class MyComponent kế thừa class Component
 class MyComponent extends React.Component {
@@ -12,9 +13,9 @@ class MyComponent extends React.Component {
         firstName: '',
         lastName: '',
         arrJobs: [
-            { id: 'a1', title: 'Dev', salary: '100$' },
-            { id: 'a2', title: 'Test', salary: '200$' },
-            { id: 'a3', title: 'CD', salary: '300$' },
+            { id: 'a1', title: 'Dev', salary: '100' },
+            { id: 'a2', title: 'Test', salary: '200' },
+            { id: 'a3', title: 'CD', salary: '300' },
         ]
     }
 
@@ -44,8 +45,12 @@ class MyComponent extends React.Component {
                 age = {'22'}
                 arrJobs = {this.state.arrJobs}
                 />
-                {/* <ChildComponent name={'two'} />
-                <ChildComponent name={'three'} /> */}
+ 
+                <FunctionComponent
+                    name={'one'}
+                    age={'22'}
+                    arrJobs={this.state.arrJobs}
+                />
             </>
 
         )
