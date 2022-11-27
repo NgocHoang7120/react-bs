@@ -10,8 +10,15 @@ class MyComponent extends React.Component {
 // khai báo state global
     state = {
         firstName: '',
-        lastName: ''
+        lastName: '',
+        arrJobs: [
+            { id: 'a1', title: 'Dev', salary: '100$' },
+            { id: 'a2', title: 'Test', salary: '200$' },
+            { id: 'a3', title: 'CD', salary: '300$' },
+        ]
     }
+
+
 
     handleChangeFirstName = (event) => this.setState({ firstName: event.target.value })
     handleChangeLasttName = (event) => this.setState({ lastName: event.target.value })
@@ -35,6 +42,7 @@ class MyComponent extends React.Component {
                 <ChildComponent 
                 name = {'one'}
                 age = {'22'}
+                arrJobs = {this.state.arrJobs}
                 />
                 {/* <ChildComponent name={'two'} />
                 <ChildComponent name={'three'} /> */}
