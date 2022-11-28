@@ -1,6 +1,7 @@
 import React from 'react';
 import ChildComponent from './ChildComponent';
 import FunctionComponent from './functioncomponent';
+import InputComponent from './addComponent';
 
 // class MyComponent kế thừa class Component
 class MyComponent extends React.Component {
@@ -19,26 +20,12 @@ class MyComponent extends React.Component {
         ]
     }
 
-
-
-    handleChangeFirstName = (event) => this.setState({ firstName: event.target.value })
-    handleChangeLasttName = (event) => this.setState({ lastName: event.target.value })
-    handleSubmit = (event) => {
-        event.preventDefault()
-        console.log('>>>check data input (state): ', this.state);
-        alert('click me')
-    }
     render() {
         console.log('>>>call render:', this.state);
         return(
             <>
-                <form action="">
-                    <label htmlFor="fname">First name:</label><br/>
-                    <input type="text" value={this.state.firstName} onChange={(event) => this.handleChangeFirstName(event)} /><br/>
-                    <label htmlFor="lname">Last name:</label><br/>
-                    <input type="text" value={this.state.lastName} onChange={event => this.handleChangeLasttName(event)} /><br/><br/>
-                    <input type="submit" value="Click here" onClick={(event) => this.handleSubmit(event)} />
-                </form>
+                <InputComponent />
+
                 {/* truyền xuống thằng con thuộc tính name = one, two, three */}
                 <ChildComponent 
                 name = {'one'}
