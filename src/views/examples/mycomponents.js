@@ -20,11 +20,21 @@ class MyComponent extends React.Component {
         ]
     }
 
+    addNewjob = (job) =>  {
+        console.log("1");
+        console.log(">>>check job from parent component: ", job);
+        this.setState({
+            arrJobs: [...this.state.arrJobs, job]
+        })
+    }
+
     render() {
         console.log('>>>call render:', this.state);
         return(
             <>
-                <InputComponent />
+                <InputComponent
+                    addNewjob = {this.addNewjob}
+                 />
 
                 {/* truyền xuống thằng con thuộc tính name = one, two, three */}
                 <ChildComponent 

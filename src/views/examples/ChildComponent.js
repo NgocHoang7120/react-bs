@@ -11,7 +11,7 @@ class ChildComponent extends React.Component{
     
     handleShowHide = () => {
         this.setState({
-            showJobs: !this.state.showJobs,
+            showJobs: !this.state.showJobs
         })
     }
 
