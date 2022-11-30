@@ -1,5 +1,5 @@
 import React from "react";
-
+import './ChildComponent.scss';
 class ChildComponent extends React.Component{
     // state = {
     //     firstName: 'C',
@@ -15,6 +15,12 @@ class ChildComponent extends React.Component{
         })
     }
 
+    handleDelete = (job) => {
+        // alert('x')
+        console.log(">>>check job: ", job);
+        this.props.deleteAjob(job)
+    }
+
     render(){
         let {showJobs} = this.state
         // console.log('>>>check data input: ', this.state);
@@ -27,7 +33,10 @@ class ChildComponent extends React.Component{
             <>
                 {/* this.props.name là lấy dữ liệu name từ thằng cha truyền xuống */}
                 {/* <div>number: {name} - {age}</div> */}
-                {!showJobs && <div><button type="" onClick={() => this.handleShowHide()}>Show</button></div>}
+                {!showJobs && 
+                    <div>
+                        <button className="btn-show" type="" onClick={() => this.handleShowHide()}>Show</button>
+                    </div>}
                 {/* {showJobs ===false && <div><button type="">Show</button></div>} */}
                 {showJobs && 
                     <>
@@ -36,7 +45,7 @@ class ChildComponent extends React.Component{
                                 arrJobs.map((item, index) => {
                                     if (item.salary >= 200) {
                                         return (
-                                            <div key={item.id}>{index + 1}: {item.title} - {item.salary}</div>
+                                            <div key={item.id}>{index + 1}: {item.title} - {item.salary}&nbsp;<span onClick={() => this.handleDelete(item)} style={{ cursor: "pointer" }}>x</span> </div>
                                         )
                                     } else{
                                         return null; // {}
