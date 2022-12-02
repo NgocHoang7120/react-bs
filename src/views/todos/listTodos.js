@@ -26,9 +26,6 @@ class ListTodo extends React.Component {
     }
 
     handleDeleteTodo = (todo) => {
-        // alert('clicked delete !')
-        // console.log(">>>check todo: ", todo);
-
         let currentTodo = this.state.listT;
         currentTodo = currentTodo.filter(item => item.id !== todo.id)
         this.setState({
@@ -37,9 +34,12 @@ class ListTodo extends React.Component {
         toast.success('Delete done !')
     }
 
-    handleEditTodo = (todo) => {
+    handleSaveTodo = (todo) => {
         // alert("handleEdit todo !")
-        console.log(">>>check EditTodo from handleEdit: ", todo);
+        this.setState({
+            listT:  todo
+        })
+        // console.log(">>>List Son here: ", todo);
     }
 
     render() {
@@ -54,7 +54,7 @@ class ListTodo extends React.Component {
                     <RenderList 
                         listT = {listT}
                         handleDeleteTodo={this.handleDeleteTodo}
-                        handleEditTodo={this.handleEditTodo}
+                        handleSaveTodo={this.handleSaveTodo}
                     />
 
                     {/* <div className="list-todo-content">

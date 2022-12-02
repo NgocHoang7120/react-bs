@@ -3,6 +3,8 @@ import React from "react";
 class RenderList extends React.Component  {
 
     state = {
+        // hứng giá trị của thằng cha truyền xuống
+        listSon: this.props.listT, // ko render động được
         EditTodo: {}
     }
     catchDeleteButton = (todo) => {
@@ -18,11 +20,11 @@ class RenderList extends React.Component  {
             let objIndex = listTodosCopy.findIndex(item => item.id ===todo.id);
             listTodosCopy[objIndex].title = EditTodo.title;
             this.setState({
-                EditTodo: listTodosCopy
+                listSon: listTodosCopy,
+                EditTodo: {}
             })
-            // console.log(">>>check edit todo from catchEdit1:", EditTodo);
-            this.props.handleEditTodo(EditTodo);
-            // console.log("number 1");
+
+            this.props.handleSaveTodo(this.state.listSon);
             return;
         }
 
@@ -30,8 +32,6 @@ class RenderList extends React.Component  {
         this.setState({
             EditTodo: todo
         })
-        console.log(">>>check edit todo from catchEdit:", todo);
-        this.props.handleEditTodo(todo);
     }
 
     handleOnChangeEdit = (event) => {
@@ -41,17 +41,16 @@ class RenderList extends React.Component  {
         this.setState({
             EditTodo: EditTodoCopy,
         })
-        // console.log(">>>check EditTodo: ", this.state.EditTodo);
+        
     }
 
     render() {
         let { EditTodo } = this.state;
         let isEmptyObj = Object.keys(EditTodo).length === 0;
-        // console.log(">>>check isEmptyObj: ", isEmptyObj);
+        console.log(">>>check isEmptyObj @@@: ", isEmptyObj);
 
         return(
             <div className="list-todo-content">
-                {/* {console.log("item.title", listT.title)} */}
                 {this.props.listT && this.props.listT.length > 0 &&
                     this.props.listT.map((item, index) => {
                         return (
@@ -61,7 +60,7 @@ class RenderList extends React.Component  {
                                         <span>{index + 1} - {item.title} </span>
                                         :
                                         <>
-                                            {EditTodo.id === item.id?
+                                            {EditTodo.id === item.id ?
                                                 <span>{index + 1} - <input value={EditTodo.title} onChange={(event) => this.handleOnChangeEdit(event)} /> </span>
                                                 :
                                                 <span>{index + 1} - {item.title} </span>
@@ -72,8 +71,14 @@ class RenderList extends React.Component  {
                                         {isEmptyObj === false && EditTodo.id === item.id ?
                                             <>
                                                 Save
+                                                {/* {console.log(">>>check isEmptyObj from SAVE", isEmptyObj)}
+                                                {console.log(">>>>checkkkk:", isEmptyObj === false && EditTodo.id === item.id)} */}
                                             </>
-                                            :"Edit"
+                                            :
+                                            <>
+                                                {/* {console.log(">>>check isEmptyObj from EDIT", isEmptyObj)} */}
+                                                Edit
+                                            </>
                                         }
                                     </button>
                                     <button className="Delete" onClick={() => this.catchDeleteButton(item)} >Delete</button>
