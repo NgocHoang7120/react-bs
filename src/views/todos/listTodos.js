@@ -37,7 +37,7 @@ class ListTodo extends React.Component {
     handleSaveTodo = (todo) => {
         // alert("handleEdit todo !")
         this.setState({
-            listT:  todo
+            listT: todo
         })
         // console.log(">>>List Son here: ", todo);
     }
@@ -47,6 +47,10 @@ class ListTodo extends React.Component {
         // console.log("check:", listT);
         return(
             <>
+                <p>
+                    {/* Edit <code>src/App.js</code> and save to reload. */}
+                    Simple TODO Apps world from reactJs &#38; my laptop
+                </p>
                 <div className="list-todo-container">
                     <InputTodo 
                         addAtodo={this.addAtodo}

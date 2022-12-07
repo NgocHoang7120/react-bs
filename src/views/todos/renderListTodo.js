@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from 'react-toastify';
 
 class RenderList extends React.Component  {
 
@@ -25,6 +26,7 @@ class RenderList extends React.Component  {
             })
 
             this.props.handleSaveTodo(this.state.listSon);
+            toast.info('edit done !')
             return;
         }
 
