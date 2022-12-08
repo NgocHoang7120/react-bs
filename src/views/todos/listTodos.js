@@ -16,7 +16,7 @@ class ListTodo extends React.Component {
     }
 
     addAtodo = (newTodo) => {
-        console.log(">>>check newTodo: ", newTodo);
+        // console.log(">>>check newTodo: ", newTodo);
         let currentTodo = [...this.state.listT, newTodo];
         // // let currentTodo = this.state.listT;
         // // currentTodo.push(currentTodo)

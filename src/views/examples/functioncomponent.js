@@ -1,7 +1,7 @@
 import React from "react";
 
 const FunctionComponent = (props) => {
-    console.log('>>>props from FunctionComponent: ', props);
+    // console.log('>>>props from FunctionComponent: ', props);
     let {arrJobs} =  props
     return(
         <>

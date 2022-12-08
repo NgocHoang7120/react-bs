@@ -61,7 +61,7 @@ class MyComponent extends React.Component {
     }
 
     render() {
-        console.log('>>>call render:', this.state);
+        // console.log('>>>call render:', this.state);
         return(
             <>
                 <InputComponent

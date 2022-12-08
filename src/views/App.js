@@ -14,8 +14,9 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  // Link
 } from "react-router-dom";
+import ListUsers from './Users/listUsers';
 
 function App() {
   return (
@@ -44,6 +45,9 @@ function App() {
             </Route>
             <Route path="/about">
               <MyComponent />
+            </Route>
+            <Route path='/user'>
+              <ListUsers />
             </Route>
           </Switch>
 
