@@ -51,7 +51,7 @@ class RenderList extends React.Component  {
     render() {
         let { EditTodo } = this.state;
         let isEmptyObj = Object.keys(EditTodo).length === 0;
-        console.log(">>>check isEmptyObj @@@: ", isEmptyObj);
+        // console.log(">>>check isEmptyObj @@@: ", isEmptyObj);
 
         return(
             <div className="list-todo-content">
