@@ -17,6 +17,7 @@ import {
   // Link
 } from "react-router-dom";
 import ListUsers from './Users/listUsers';
+import DetailUser from './Users/detailUser';
 
 function App() {
   return (
@@ -46,8 +47,11 @@ function App() {
             <Route path="/about">
               <MyComponent />
             </Route>
-            <Route path='/user'>
+            <Route path='/user' exact>
               <ListUsers />
+            </Route>
+            <Route path='/user/:id'>
+              <DetailUser />
             </Route>
           </Switch>
 
