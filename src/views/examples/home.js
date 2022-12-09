@@ -1,6 +1,7 @@
 import React from "react";
 // import { withRouter } from "react-router";
 import Color from "../HOC/Color";
+import logo from "../../assets/images/a.jpg"
 
 class Home extends React.Component {
     componentDidMount() {
@@ -14,6 +15,9 @@ class Home extends React.Component {
             <>
                 <div>
                     Here is my home page.
+                </div>
+                <div>
+                    <img src={logo} alt="img" />
                 </div>
             </>
         )
