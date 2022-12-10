@@ -8,6 +8,7 @@ const initState = {
 }
 
 const rootReducer = (state = initState, action) => {
+    let { payload } = action;
     switch(action.type){
         case 'delete_user':
             // console.log(">>>check case delete_user", action);
@@ -16,10 +17,16 @@ const rootReducer = (state = initState, action) => {
             return { ...state, users };
             // break;
         case 'create_user':
-            // console.log(">>>check payload:", action.payload.name);
-            let {payload} = action;
+            console.log(">>>check payload:", action);
+            // let { payload } = action;
             // console.log(">>>check payload: ", payload);
-            return { ...state, users: [...state.users, payload]};
+            return { ...state, users: [...state.users, payload] };
+            // return { ...state, users: [...state.users] };
+        case 'editUserRedux':
+            // let {payload} = action;
+            return {...state, users: payload}
+            // break;
+
         default:
             return state;
     }

@@ -6,7 +6,8 @@ import { connect } from "react-redux";
 
 class Home extends React.Component {
     state = {
-        name: ''
+        name: '',
+        check: {}
     }
 
     handleChangeText = (event) => {
@@ -16,8 +17,11 @@ class Home extends React.Component {
     }
 
     handleCreateUser = (user) => {
-        let id = Math.floor(Math.random()*10000);
-        this.props.createUserRedux(user, id)
+        // console.log(">>> check user.trim():", user.trim());
+        if (user !== '' && user.trim() !== '') {
+            let id = Math.floor(Math.random() * 10000);
+            this.props.createUserRedux(user, id)
+        }
         
         this.setState({
             name: ''
@@ -33,12 +37,43 @@ class Home extends React.Component {
         console.log(">>>check user delete: ", user);
         this.props.deleteUserRedux(user)
     }
+    handleEdit = (user) => {
+        let {check} = this.state;
+        let isEmptyObj = Object.keys(check).length === 0;
+
+        if (isEmptyObj === false && user.id === check.id){
+            let listUserReduxCopy = [...this.props.dataRedux];
+            let objIndex = listUserReduxCopy.findIndex(item => item.id === check.id);
+            listUserReduxCopy[objIndex].name = check.name;
+            this.setState({
+                check: {}
+            })
+            this.props.editUserRedux(listUserReduxCopy)
+        } else {
+            this.setState({
+                check: user
+            })
+        }
+
+    }
+    handleChangeValue = (event) => {
+        let userCopy = this.state.check;
+        userCopy.name = event.target.value;
+        this.setState({
+            check: userCopy,
+        })
+    }
+
+
     render() {
         // console.log(">>>check props: ", this.props);
         let listUserRedux = this.props.dataRedux;
         let mystyle = {
             cursor: 'pointer'
         }
+        let {check} = this.state;
+        let isEmptyObj = Object.keys(check).length === 0;
+        console.log(">>>check isEmptyObj:", isEmptyObj);
         return(
             <>
                 <div>
@@ -48,19 +83,45 @@ class Home extends React.Component {
                     <img src={logo} alt="img" style={{height: '100px'}}/>
                 </div>
                 <div>
+                    <input type='text' value={this.state.name} onChange={(event) => this.handleChangeText(event)}/>
+                    <button type="" onClick={() => this.handleCreateUser(this.state.name)}>ADD</button>
+                </div>
+                <div>
                     {listUserRedux && listUserRedux.length > 0 &&
                         listUserRedux.map((item, index) => {
                             return(
                                 <div key={item.id}>
-                                    {index + 1} - {item.name} <span style={mystyle} onClick={() => this.handleDelete(item)}>x</span>
+                                    {isEmptyObj === true ?
+                                        <>
+                                            {index + 1} - {item.name} &nbsp;
+                                            <span style={mystyle} onClick={() => this.handleDelete(item)}>x</span> &nbsp;
+                                        </>
+                                        :
+                                        <>
+                                            {item.id === check.id ?
+                                                <>
+                                                    {index + 1} - &nbsp;
+                                                    <input value={check.name} onChange={(event) => this.handleChangeValue(event)}/> &nbsp;
+                                                    {/* <span style={mystyle} onClick={() => this.handleDelete(item)}>x</span> &nbsp; */}
+                                                </>
+                                                :
+                                                <>
+                                                    {index + 1} - {item.name} &nbsp;
+                                                    <span style={mystyle} onClick={() => this.handleDelete(item)}>x</span> &nbsp;
+                                                </>
+
+                                            }
+                                        </>
+                                    }
+                                    <button type="" onClick={() => this.handleEdit(item)}>
+                                        {isEmptyObj === false && check.id === item.id ?
+                                            'Save':'Edit'
+                                        }
+                                    </button>
                                 </div>
                             )
                         })
                     }
-                </div>
-                <div>
-                    <input type='text' value={this.state.name} onChange={(event) => this.handleChangeText(event)}/>
-                    <button type="" onClick={() => this.handleCreateUser(this.state.name)}>ADD</button>
                 </div>
             </>
         )
@@ -68,13 +129,17 @@ class Home extends React.Component {
 };
 
 const mapStateToProps = (state) => {
-    return { dataRedux: state.users }
+    return { 
+        dataRedux: state.users,
+        postRedux: state.posts,
+    }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteUserRedux: (userD) => dispatch({type: 'delete_user', payload: userD}),
         createUserRedux: (NewUser, id) => dispatch({type: 'create_user', payload: {id: id, name: NewUser}}),
+        editUserRedux: (userEdit) => dispatch({type: 'edit_user', payload: userEdit}),
     }
 }
 
